@@ -11,15 +11,14 @@ class ItemsWidget extends StatelessWidget {
       children: [
         for (int i = 1; i < 9; i++)
           Container(
-            padding: EdgeInsets.only(left: 15, right: 15, top: 10),
+            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10), // Menyesuaikan padding
             margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 226, 221, 221),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, // Align items to the start
+              crossAxisAlignment: CrossAxisAlignment.start, // Align items to the start
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,11 +49,13 @@ class ItemsWidget extends StatelessWidget {
                     Navigator.pushNamed(context, 'itemPage');
                   },
                   child: Container(
-                    margin: EdgeInsets.all(10),
-                    child: Image.asset(
-                      "images/$i.png",
-                      width: 170,
-                      height: 170,
+                    margin: EdgeInsets.symmetric(vertical: 10), // Menyesuaikan margin
+                    child: AspectRatio( // Menggunakan AspectRatio untuk menjaga proporsi gambar
+                      aspectRatio: 1,
+                      child: Image.asset(
+                        "images/$i.png",
+                        fit: BoxFit.cover, // Mengisi area dengan proporsi yang benar
+                      ),
                     ),
                   ),
                 ),
@@ -68,6 +69,8 @@ class ItemsWidget extends StatelessWidget {
                         fontSize: 13,
                         fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 2, // Membatasi jumlah baris untuk menghindari overflow
+                      overflow: TextOverflow.ellipsis, // Menambahkan elipsis jika terlalu panjang
                     ),
                   ),
                 ),
